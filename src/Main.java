@@ -4,25 +4,20 @@ public class Main {
         System.out.println("Welcome to Book My Stay App");
         System.out.println("Hotel Booking System v1.0\n");
 
-        // Room objects (same as UC2)
+        // Room objects
         Room r1 = new SingleRoom();
         Room r2 = new DoubleRoom();
         Room r3 = new SuiteRoom();
 
-        // Centralized inventory
+        Room[] rooms = {r1, r2, r3};
+
+        // Inventory (UC3)
         RoomInventory inventory = new RoomInventory();
 
-        // Display room details
-        r1.displayDetails();
-        System.out.println("Available: " + inventory.getAvailability("Single Room") + "\n");
+        // Search Service (UC4)
+        RoomSearchService searchService = new RoomSearchService(inventory);
 
-        r2.displayDetails();
-        System.out.println("Available: " + inventory.getAvailability("Double Room") + "\n");
-
-        r3.displayDetails();
-        System.out.println("Available: " + inventory.getAvailability("Suite Room") + "\n");
-
-        // Display full inventory
-        inventory.displayInventory();
+        // Perform search (READ ONLY)
+        searchService.searchAvailableRooms(rooms);
     }
 }
