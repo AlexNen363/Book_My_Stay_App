@@ -1,18 +1,32 @@
-// Add-on services (UC7)
-AddOnServiceManager manager = new AddOnServiceManager();
+public class Main {
+    public static void main(String[] args) {
 
-// Example reservation IDs (from UC6 output)
-String res1 = "SI-1";
-String res2 = "DO-2";
+        System.out.println("Welcome to Book My Stay App\n");
 
-// Add services
-manager.addService(res1, new Service("Breakfast", 200));
-        manager.addService(res1, new Service("WiFi", 100));
-        manager.addService(res2, new Service("Airport Pickup", 500));
+        // Inventory
+        RoomInventory inventory = new RoomInventory();
 
-// Display services
-        manager.displayServices(res1);
+        // Queue
+        BookingQueue bookingQueue = new BookingQueue();
 
-// Total cost
-double total = manager.calculateTotalCost(res1);
-System.out.println("Total Add-on Cost for " + res1 + ": Rs." + total);
+        bookingQueue.addRequest(new Reservation("Alice", "Single Room"));
+        bookingQueue.addRequest(new Reservation("Bob", "Double Room"));
+        bookingQueue.addRequest(new Reservation("Charlie", "Suite Room"));
+
+        // UC8 History
+        BookingHistory history = new BookingHistory();
+
+        // Booking Service
+        BookingService bookingService =
+                new BookingService(bookingQueue, inventory, history);
+
+        bookingService.processBookings();
+
+        // Show History
+        history.displayHistory();
+
+        // Report
+        BookingReportService reportService = new BookingReportService();
+        reportService.generateReport(history.getHistory());
+    }
+}
