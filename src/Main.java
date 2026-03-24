@@ -3,15 +3,22 @@ public class Main {
 
         System.out.println("Welcome to Book My Stay App\n");
 
-        // Booking Queue (UC5)
+        // Inventory
+        RoomInventory inventory = new RoomInventory();
+
+        // Booking Queue
         BookingQueue bookingQueue = new BookingQueue();
 
-        // Guest requests (arrival order)
+        // Add requests
         bookingQueue.addRequest(new Reservation("Alice", "Single Room"));
         bookingQueue.addRequest(new Reservation("Bob", "Double Room"));
         bookingQueue.addRequest(new Reservation("Charlie", "Suite Room"));
+        bookingQueue.addRequest(new Reservation("David", "Single Room"));
 
-        // View queue (FIFO order)
-        bookingQueue.viewRequests();
+        // Booking Service
+        BookingService bookingService = new BookingService(bookingQueue, inventory);
+
+        // Process bookings
+        bookingService.processBookings();
     }
 }
