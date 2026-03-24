@@ -1,23 +1,17 @@
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Welcome to Book My Stay App");
-        System.out.println("Hotel Booking System v1.0\n");
+        System.out.println("Welcome to Book My Stay App\n");
 
-        // Room objects
-        Room r1 = new SingleRoom();
-        Room r2 = new DoubleRoom();
-        Room r3 = new SuiteRoom();
+        // Booking Queue (UC5)
+        BookingQueue bookingQueue = new BookingQueue();
 
-        Room[] rooms = {r1, r2, r3};
+        // Guest requests (arrival order)
+        bookingQueue.addRequest(new Reservation("Alice", "Single Room"));
+        bookingQueue.addRequest(new Reservation("Bob", "Double Room"));
+        bookingQueue.addRequest(new Reservation("Charlie", "Suite Room"));
 
-        // Inventory (UC3)
-        RoomInventory inventory = new RoomInventory();
-
-        // Search Service (UC4)
-        RoomSearchService searchService = new RoomSearchService(inventory);
-
-        // Perform search (READ ONLY)
-        searchService.searchAvailableRooms(rooms);
+        // View queue (FIFO order)
+        bookingQueue.viewRequests();
     }
 }
